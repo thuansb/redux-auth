@@ -18,4 +18,4 @@ class FirstTimeLoginSuccessModal extends React.Component {
   }
 }
 
-export default connect(({auth}) => ({auth}))(FirstTimeLoginSuccessModal);
+export default connect((state) => { console.log(state); return {auth: state.get("auth")}; })(FirstTimeLoginSuccessModal);

@@ -92,4 +92,4 @@ class UpdatePasswordForm extends React.Component {
   }
 }
 
-export default connect(({auth}) => ({auth}))(UpdatePasswordForm);
+export default connect((state) => { console.log(state); return {auth: state.get("auth")}; })(UpdatePasswordForm);
