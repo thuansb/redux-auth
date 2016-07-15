@@ -17,4 +17,4 @@ class DestroyAccountSuccessModal extends React.Component {
   }
 }
 
-export default connect((state) => { console.log(state); return {auth: state.get("auth")}; })(DestroyAccountSuccessModal);
+export default connect((state) => { return {auth: state.get("auth")}; })(DestroyAccountSuccessModal);

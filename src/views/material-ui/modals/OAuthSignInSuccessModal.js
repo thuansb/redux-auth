@@ -17,4 +17,4 @@ class OAuthSignInSuccessModal extends React.Component {
   }
 }
 
-export default connect((state) => { console.log(state); return {auth: state.get("auth")}; })(OAuthSignInSuccessModal);
+export default connect((state) => { return {auth: state.get("auth")}; })(OAuthSignInSuccessModal);
