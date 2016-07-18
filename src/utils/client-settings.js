@@ -11,7 +11,8 @@ import {
   setCurrentEndpoint,
   setCurrentEndpointKey,
   retrieveData,
-  persistData
+  persistData,
+  getTokenValidationPath,
 } from "./session-storage";
 
 // can't use "window" with node app
@@ -97,8 +98,10 @@ export function applyConfig({dispatch, endpoint={}, settings={}, reset=false}={}
     persistData(C.SAVED_CREDS_KEY, headers);
     return Promise.resolve(user);
   } else if (savedCreds) {
+
     // verify session credentials with API
-    return fetch(savedCreds)
+    //return fetch(savedCreds);
+    return fetch(getTokenValidationPath(currentEndpointKey));
   } else {
     return Promise.reject({reason: "No credentials."})
   }

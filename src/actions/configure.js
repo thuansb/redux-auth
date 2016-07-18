@@ -18,6 +18,10 @@ import verifyAuth from "../utils/verify-auth";
 import getRedirectInfo from "../utils/parse-url";
 import {push} from "react-router-redux";
 
+import {
+  retrieveData,
+} from "../utils/session-storage";
+
 export const SET_ENDPOINT_KEYS = "SET_ENDPOINT_KEYS";
 export const STORE_CURRENT_ENDPOINT_KEY = "STORE_CURRENT_ENDPOINT_KEY";
 export function setEndpointKeys(endpoints, currentEndpointKey, defaultEndpointKey) {
@@ -37,7 +41,7 @@ export function configure(endpoint={}, settings={}) {
     dispatch(authenticateStart());
 
     let promise,
-        firstTimeLogin,
+        firstTimeLogin = true,
         mustResetPassword,
         user,
         headers;
@@ -102,6 +106,15 @@ export function configure(endpoint={}, settings={}) {
             firstTimeLogin
           }));
         }
+      } else {
+        // retrive data from session-storage then validate token again
+        /*
+        var currentHeaders = retrieveData(C.SAVED_CREDS_KEY);
+        if (currentHeaders && currentHeaders.uid && currentHeaders["access-token"]) {
+          firstTimeLogin = false;
+          settings.initialCredentials = extend({}, settings.initialCredentials, currentHeaders);
+        }
+        */
       }
 
       let {authRedirectPath, authRedirectHeaders} = getRedirectInfo(window.location);
@@ -116,10 +129,12 @@ export function configure(endpoint={}, settings={}) {
 
       // if tokens were invalidated by server, make sure to clear browser
       // credentials
+
+      /*
       if (!settings.initialCredentials) {
         destroySession();
       }
-
+      */
       promise = Promise.resolve(applyConfig({dispatch, endpoint, settings}));
     }
 

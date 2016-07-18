@@ -30,22 +30,15 @@ function listenForCredentials (endpointKey, popup, provider, resolve, reject) {
 
     try {
       creds = getAllParams(popup.location);
-      console.log('aaa');
-      console.log(creds);
     } catch (err) {}
 
     if (creds && creds.token) {
       popup.close();
-      console.log('eee');
-      console.log(creds);
       persistData(C.SAVED_CREDS_KEY, normalizeTokenKeys(creds));
-      //fetch(getTokenValidationPath(endpointKey))
-      //  .then(parseResponse)
-      //  .then(({data}) => resolve(data))
-      //  .catch(({errors}) => reject({errors}));
-      let data = {username: 'Test'};
-      resolve(data);
-
+      fetch(getTokenValidationPath(endpointKey))
+        .then(parseResponse)
+        .then(({data}) => resolve(data))
+        .catch(({errors}) => reject({errors}));
     } else if (popup.closed) {
       reject({errors: "Authentication was cancelled."})
     } else {
