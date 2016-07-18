@@ -96,4 +96,4 @@ class EmailSignUpForm extends React.Component {
   }
 }
 
-export default connect(({auth}) => ({auth}))(EmailSignUpForm);
+export default connect((state) => { return {auth: state.get("auth")}; })(EmailSignUpForm);

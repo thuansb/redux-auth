@@ -37,7 +37,12 @@ function getAuthHeaders(url) {
 
     // set header for each key in `tokenFormat` config
     for (var key in getTokenFormat()) {
-      nextHeaders[key] = currentHeaders[key];
+      // custom access-token
+      if (key === 'access-token') {
+        nextHeaders['token'] = currentHeaders[key];  
+      } else {
+        nextHeaders[key] = currentHeaders[key];
+      }
     }
 
     return addAuthorizationHeader(currentHeaders['access-token'], nextHeaders);

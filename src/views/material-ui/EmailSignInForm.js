@@ -90,4 +90,4 @@ class EmailSignInForm extends React.Component {
   }
 }
 
-export default connect(({auth}) => ({auth}))(EmailSignInForm);
+export default connect((state) => { return {auth: state.get("auth")}; })(EmailSignInForm);

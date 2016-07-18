@@ -119,7 +119,6 @@ export function configure(endpoint={}, settings={}) {
       if (!settings.clientOnly && !settings.initialCredentials || settings.cleanSession) {
         destroySession();
       }
-
       promise = Promise.resolve(applyConfig({dispatch, endpoint, settings}));
     }
 

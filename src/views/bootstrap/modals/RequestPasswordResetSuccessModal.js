@@ -19,4 +19,4 @@ class RequestPasswordResetSuccessModal extends React.Component {
   }
 }
 
-export default connect(({auth}) => ({auth}))(RequestPasswordResetSuccessModal);
+export default connect((state) => { return {auth: state.get("auth")}; })(RequestPasswordResetSuccessModal);
