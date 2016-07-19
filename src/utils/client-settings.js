@@ -103,7 +103,7 @@ export function applyConfig({dispatch, endpoint={}, settings={}, reset=false}={}
     return fetch(`${getApiUrl(currentEndpointKey)}${currentEndpoint[currentEndpointKey].tokenValidationPath}`)
     .then(response => {
           if (response.status >= 200 && response.status < 300) {
-            return response.json().then(({ data }) => (data));
+            return response.json().then((users) => (users[0]));
           }
           removeData(C.SAVED_CREDS_KEY);
           return Promise.reject({reason: "No credentials."});

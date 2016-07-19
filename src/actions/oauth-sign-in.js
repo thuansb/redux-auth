@@ -37,7 +37,7 @@ function listenForCredentials (endpointKey, popup, provider, resolve, reject) {
       persistData(C.SAVED_CREDS_KEY, normalizeTokenKeys(creds));
       fetch(getTokenValidationPath(endpointKey))
         .then(parseResponse)
-        .then(({data}) => resolve(data))
+        .then((users) => resolve(users[0]))
         .catch(({errors}) => reject({errors}));
     } else if (popup.closed) {
       reject({errors: "Authentication was cancelled."})
